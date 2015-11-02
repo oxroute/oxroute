@@ -624,10 +624,17 @@ $(function(){
 				$(".save_btn").on("click",function(){
 							var form = $('form');
 							var data = form.serialize();
-							$.post(saveUrl,data,function(data){
+
+					document.getElementById("PageOfficeCtrl1").WebSave();
+					var name = document.getElementById("PageOfficeCtrl1").CustomSaveResult;
+
+							$.post(saveUrl+"?reQuestion="+name,data,function(data){
+
 								// if(data==1){
 									// alert('添加成功!');
-									location.href=url;
+									//alert(url+"?reQuestion="+name);
+									//location.href = "http://192.168.0.104/uteach/Word/FileMakerSingle.php?id=9&type=answer2015103113342634883176"
+									location.href=url+"?reQuestion="+name;
 								// }
 								
 							});

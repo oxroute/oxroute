@@ -17,9 +17,15 @@ var delUrl="{:U('Public/del','','')}";
    <else/>
    		<img class="biao" src="__PUBLIC__/images/jian.png">
    </if>                       		
-	<dt><a href="javascript:void(0);" onclick="parent.open('__CONTROLLER__/show/id/{$vo.id}','',900,600);"><input id="delId" type="hidden" value="{$vo.id}">{$vo.test}</a></dt>
+	<dt>
+		<a href="javascript:void(0);" onclick="parent.open('__CONTROLLER__/show/id/{$vo.id}','',900,600);" style="width: 100%;height: 90px">
+		<input id="delId" type="hidden" value="{$vo.id}">
+			<div>			<iframe  src="/uteach/Word/doc/9/20151031/{$vo.test}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+			</div>
+	</a></dt>
 	<dd>   
-		<a href="javascript:void(0);" onclick="parent.open('__CONTROLLER__/show/id/{$vo.id}','',900,600);" class="a1"><input id="delId" type="hidden" value="{$vo.id}"></a>
+		<a href="javascript:void(0);" onclick="parent.open('__CONTROLLER__/show/id/{$vo.id}','',900,600);" class="a1">
+			<input id="delId" type="hidden" value="{$vo.id}"></a>
 		<a class="del"></a>
 	</dd>
 </dl>

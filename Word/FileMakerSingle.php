@@ -1,18 +1,17 @@
 <?php
-	//******************************卓正PageOffice组件的使用*******************************	
-	$ip = GetHostByName($_SERVER['SERVER_NAME']);//获取本机IP
 
+	$ip = GetHostByName($_SERVER['SERVER_NAME']);//获取本机IP
 	require_once("http://".$ip.":8080/JavaBridge/java/Java.inc");//此行必须
+
     $FileMakerCtrl = new Java("com.zhuozhengsoft.pageoffice.FileMakerCtrlPHP");//此行必须
     $FileMakerCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz");//此行必须，设置服务器页面
-	
+
 	java_set_file_encoding("GBK");//设置中文编码，若涉及到中文必须设置中文编码
     $id = $_REQUEST["id"];
     $filepath="doc/".$id."/".date('Ymd',time());
-
-
     $type = $_REQUEST['type'];
 	$doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument");//声明WordDocument变量
+
 	//禁用右击事件
 	$doc->setDisableWindowRightClick(true);
 	//给数据区域赋值，即把数据填充到模板中相应的位置

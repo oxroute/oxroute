@@ -305,7 +305,7 @@ var id='/uteach/index.php/home/Public/main_content.html';
                     <div class="bt_warp" style="padding-bottom:53px;">
 
                         <ul class="btn_bc">
-                            <li><input type="button" value="保存" class="add_save" /></li>
+                            <li><input type="button" value="保存" class="add_save save_btn" /></li>
                             <li class="preview"><a class="temp_look" href="javascript:void(0);">预览 </a></li>
                         </ul>
                     </div>
@@ -368,8 +368,7 @@ var id='/uteach/index.php/home/Public/main_content.html';
     // }
 
     function Save() {
-        document.getElementById("PageOfficeCtrl1").WebSave();
-        alert(document.getElementById("PageOfficeCtrl1").CustomSaveResult);
+
         //document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
     }
 </script>

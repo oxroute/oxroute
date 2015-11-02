@@ -1,4 +1,5 @@
-<?php if (!defined('THINK_PATH')) exit();?>
+<?php if (!defined('THINK_PATH')) exit(); $ip = GetHostByName($_SERVER['SERVER_NAME']); require_once("http://".$ip.":8080/JavaBridge/java/Java.inc"); if(!empty($test)){ $FileMakerCtrl = new Java("com.zhuozhengsoft.pageoffice.FileMakerCtrlPHP"); $FileMakerCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz"); java_set_file_encoding("GBK"); $id = $_SESSION['uid']; $filepath="/uteach/Word/doc/".$id."/".date('Ymd',time()); $type = $test; $doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument"); $doc->setDisableWindowRightClick(true); $FileMakerCtrl->setSaveFilePage("/uteach/Word/SaveMaker.php?id=".$id."&type=".$type); $FileMakerCtrl->setWriter($doc); $FileMakerCtrl->setJsFunction_OnProgressComplete("OnProgressComplete()"); $DocumentOpenType = new Java("com.zhuozhengsoft.pageoffice.DocumentOpenType"); $FileMakerCtrl->fillDocument($filepath."/".$type.".doc", $DocumentOpenType->Word); echo $FileMakerCtrl->getDocumentView("FileMakerCtrl1"); } ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -16,7 +17,7 @@
 </script>
 <script src="/uteach/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script> 
 <script src="/uteach/Public/js/jquery.easing.min.js" type="text/javascript"></script> 
-<script src="/uteach/Public/js/my1.js" type="text/javascript"></script>
+<script src="/uteach/Public/js/my.js" type="text/javascript"></script>
 <script src="/uteach/Public/js/bu.js" type="text/javascript"></script>
  <script type="text/javascript" src="/uteach/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=blue"></script>
 <script src="/uteach/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
@@ -231,6 +232,15 @@ var id='/uteach/index.php/home/Public/main_content.html';
       	</td>
     </tr>
 </table>
+<script language="javascript" type="text/javascript">
+	function OnProgressComplete() {
+		document.getElementById("FileMakerCtrl1").WebSaveAsHTML();
+		//window.parent.myFunc(); //调用父页面的js函数
+	}
+	
+
+</script>
+
 
 </body>
 

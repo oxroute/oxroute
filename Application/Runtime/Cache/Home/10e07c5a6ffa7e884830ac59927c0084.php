@@ -57,7 +57,9 @@
         </div>
         <div id="sroll_box">
             <div class="con2">
-            	<?php echo ($date["test"]); ?>
+            	<!--<?php echo ($date["test"]); ?>-->
+                <iframe  src="/uteach/Word/doc/9/20151031/<?php echo ($date["test"]); ?>.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+
             </div>
             <div class="con3">
             	<div>答案：<?php echo ($date["answer"]); ?></div>

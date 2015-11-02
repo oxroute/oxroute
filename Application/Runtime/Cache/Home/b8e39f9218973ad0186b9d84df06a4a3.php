@@ -16,7 +16,7 @@
 </script>
 <script src="/uteach/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script> 
 <script src="/uteach/Public/js/jquery.easing.min.js" type="text/javascript"></script> 
-<script src="/uteach/Public/js/my1.js" type="text/javascript"></script>
+<script src="/uteach/Public/js/my.js" type="text/javascript"></script>
 <script src="/uteach/Public/js/bu.js" type="text/javascript"></script>
  <script type="text/javascript" src="/uteach/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=blue"></script>
 <script src="/uteach/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
@@ -87,9 +87,15 @@ var delUrl="<?php echo U('Public/del','','');?>";
    		<img class="biao" src="/uteach/Public/images/xuan.png">
    <?php else: ?>
    		<img class="biao" src="/uteach/Public/images/jian.png"><?php endif; ?>                       		
-	<dt><a href="javascript:void(0);" onclick="parent.open('/uteach/index.php/Home/Public/show/id/<?php echo ($vo["id"]); ?>','',900,600);"><input id="delId" type="hidden" value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["test"]); ?></a></dt>
+	<dt>
+		<a href="javascript:void(0);" onclick="parent.open('/uteach/index.php/Home/Public/show/id/<?php echo ($vo["id"]); ?>','',900,600);" style="width: 100%;height: 90px">
+		<input id="delId" type="hidden" value="<?php echo ($vo["id"]); ?>">
+			<div>			<iframe  src="/uteach/Word/doc/9/20151031/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+			</div>
+	</a></dt>
 	<dd>   
-		<a href="javascript:void(0);" onclick="parent.open('/uteach/index.php/Home/Public/show/id/<?php echo ($vo["id"]); ?>','',900,600);" class="a1"><input id="delId" type="hidden" value="<?php echo ($vo["id"]); ?>"></a>
+		<a href="javascript:void(0);" onclick="parent.open('/uteach/index.php/Home/Public/show/id/<?php echo ($vo["id"]); ?>','',900,600);" class="a1">
+			<input id="delId" type="hidden" value="<?php echo ($vo["id"]); ?>"></a>
 		<a class="del"></a>
 	</dd>
 </dl><?php endforeach; endif; else: echo "" ;endif; ?>

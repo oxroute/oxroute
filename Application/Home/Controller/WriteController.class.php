@@ -6,6 +6,23 @@ namespace Home\Controller;
 use Think\Controller;
 header('Content-type: text/html;charset=UTF-8');
 class WriteController extends CommonController {
+	public function index(){
+		$test = null;
+		$answer = null;
+		$analytical = null;
+		if(isset($_GET['reQuestion'])) {
+			$de = $_GET['reQuestion'];
+			$question = explode('-',$de);
+			$test=$question[0];
+			$answer=$question[1];
+			$analytical=$question[2];
+		}
+		$this->assign('test',$test);
+		$this->assign('answer',$answer);
+		$this->assign('analytical',$analytical);
+
+		$this->display();
+	}
 	public function showLeft(){
 		$chapter=M('chapter');
 		if($_GET['fid']!=''){
@@ -53,9 +70,12 @@ class WriteController extends CommonController {
     		}else{
 
     			$data=unserialize($_POST);
+				$de = $_GET['reQuestion'];
+				$question = explode('-',$de);
                 $write->sid = session('schoolid');
+
     			$id=$write->add($data);
-    			$data = array('wtime'=>time(),'tid'=>$_SESSION['uid'],'weight'=>$id);
+    			$data = array('wtime'=>time(),'tid'=>$_SESSION['uid'],'weight'=>$id,'test'=>$question[0],'answer'=>$question[1],'analytical'=>$question[2]);
     			$weight=$write->where(array('id'=>$id))->setField($data);
     			if($weight!==FALSE){
     				$this->ajaxReturn(1,'json');
