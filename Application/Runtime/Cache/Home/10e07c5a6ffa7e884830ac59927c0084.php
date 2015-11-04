@@ -58,12 +58,18 @@
         <div id="sroll_box">
             <div class="con2">
             	<!--<?php echo ($date["test"]); ?>-->
-                <iframe  src="/uteach/Word/doc/9/20151031/<?php echo ($date["test"]); ?>.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+                <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$date["wtime"])); ?>/<?php echo ($date["test"]); ?>.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
 
             </div>
             <div class="con3">
-            	<div>答案：<?php echo ($date["answer"]); ?></div>
-                <div>解析：<?php echo ($date["analytical"]); ?></div>
+            	<div>答案：
+                    <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$date["wtime"])); ?>/<?php echo ($date["answer"]); ?>.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+
+                </div>
+                <div>解析：
+                    <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$date["wtime"])); ?>/<?php echo ($date["analytical"]); ?>.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+
+                </div>
                 <div>备注：<p><?php echo ($date["remarks"]); ?></p></div>
             </div>
 

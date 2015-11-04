@@ -41,16 +41,22 @@ $(".popcon p img").attr("align","")
 			</div> 
 
 
-			<div class="popcon">{$vo.test}
+			<div class="popcon">
+                <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$vo.wtime|date='Ymd',###}/{$vo.test}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
 
-			<input name="" type="button" class="edit" value="移除试题" />
+
+                <input name="" type="button" class="edit" value="移除试题" />
 			</div>
 			
-			<p class="popgreen">正确答案：{$vo.answer}</p>
+			<p class="popgreen">正确答案：
+                <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$vo.wtime|date='Ymd',###}/{$vo.answer}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+            </p>
 			<div class="popconnti">详细解析</div>
 </div>
 		<div class="content_xq">
-			{$vo.analytical|htmlspecialchars_decode=###}
+            <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$vo.wtime|date='Ymd',###}/{$vo.analytical}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
 		</div>
 		</volist>
 

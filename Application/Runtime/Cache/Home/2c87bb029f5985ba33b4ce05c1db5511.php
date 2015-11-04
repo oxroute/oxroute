@@ -3,10 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<link rel="stylesheet" href="/Public/css/lrtkfy.css" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/Public/css/popstyle.css"/>
-<script src="/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/uteach/Public/css/lrtkfy.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/popstyle.css"/>
+<script src="/uteach/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="/uteach/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
 
 <style>
 	body{padding: 0;margin: 0}
@@ -22,7 +22,7 @@ $(function(){
 			$(window.top.document).find("#all_id").val(str_id)
 		}
 		
-		$.post('/index.php/Home/Choose/get_all_id',{all_id:$(window.top.document).find("#all_id").val()},function(data){
+		$.post('/uteach/index.php/Home/Choose/get_all_id',{all_id:$(window.top.document).find("#all_id").val()},function(data){
 			if('data==1'){
 				parent.R_alert('替换试题成功,请稍后.....!')
 			}
@@ -51,8 +51,10 @@ $(function(){
 <span style="width:100px">题型：<?php echo ($vo["questions"]); ?></span>
 <span style="float:right;max-width:100px">来源：<?php echo ($vo["source"]); ?></span>
 </div> 
-<div class="popcon"><?php echo ($vo["test"]); ?>
-<input name="" type="button" class="popbut" value="替换本题" />
+<div class="popcon">
+    <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+    <input name="" type="button" class="popbut" value="替换本题" />
 </div>
 <p class="popgreen">正确答案：<?php echo ($vo["answer"]); ?></p>
 <!-- <div class="popconnti">详细解析</div> -->

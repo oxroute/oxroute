@@ -1,21 +1,22 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit(); $ip = $_SERVER['SERVER_NAME']; require_once("http://".$ip.":8080/JavaBridge/java/Java.inc"); $PageOfficeCtrl = new Java("com.zhuozhengsoft.pageoffice.PageOfficeCtrlPHP"); $PageOfficeCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz"); java_set_file_encoding("UTF-8"); $doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument"); $dataRegionInsertType = new Java("com.zhuozhengsoft.pageoffice.wordwriter.DataRegionInsertType"); $header = $doc->openDataRegion("PO_header"); $header->setValue($epaper['header']); $subject = $doc->openDataRegion("PO_subject"); $subject->setValue($epaper['subject']); $know = $doc->openDataRegion("PO_know"); $knowStr = str_replace("|","\r\n",$epaper['know']); $know->setValue($knowStr); $note = $doc->openDataRegion("PO_note"); $note->setValue($epaper['note']); $onetype = $doc->openDataRegion("PO_onetype"); $onetypeStr = str_replace("|","\r\n",$epaper['one_type']); $onetype->setValue($onetypeStr); $twotype = $doc->openDataRegion("PO_twotype"); $twotypeStr = str_replace("|","\r\n",$epaper['two_type']); $twotype->setValue($twotypeStr); $oneContext = "PO_onetcontext"; $twotContext = "PO_twotcontext"; $select = "PO_one"; $tiankong = "PO_two"; foreach($list as $vo){ if ($vo['questions'] == "选择题"){ $selectvar = $select.$vo['id']; $one1 = $doc->createDataRegion($selectvar,$dataRegionInsertType->After,$oneContext); $one1->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$vo['wtime'])."/".$vo['test'].".doc[/word]\r\n"); $oneContext = $selectvar; }else{ $tiankongvar = $tiankong.$vo['id']; $two1 = $doc->createDataRegion($tiankongvar,$dataRegionInsertType->After,$twotContext); $two1->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$vo['wtime'])."/".$vo['test'].".doc[/word]\r\n"); $twotContext = $tiankongvar; } } $PageOfficeCtrl->setWriter($doc); $PageOfficeCtrl->setMenubar(false); $PageOfficeCtrl->setCustomToolbar(false); $PageOfficeCtrl->setSaveFilePage("/uteach/Word/SavePage.php?id=".$_SESSION['uid']); $PageOfficeCtrl->addCustomToolButton("保存","Save",1); $PageOfficeCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];$OpenMode = new Java("com.zhuozhengsoft.pageoffice.OpenModeType"); $PageOfficeCtrl->webOpen($pagePath, $OpenMode->docNormalEdit, "张三");?>
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=0.95, user-scalable=no" />
 <title>指南树</title>
-<link rel="stylesheet" type="text/css" href="/Public/css/style.css" /><!-- 必须 -->
-<link rel="stylesheet" type="text/css" href="/Public/css/popstyle.css"/><!-- 弹窗样式 -->
-<link rel="stylesheet" type="text/css" href="/Public/css/xlmenu.css"/><!-- tou -->
-<link rel="stylesheet" type="text/css" href="/Public/css/layout.css"/><!-- 必须 -->
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/style.css" /><!-- 必须 -->
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/popstyle.css"/><!-- 弹窗样式 -->
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/xlmenu.css"/><!-- tou -->
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/layout.css"/><!-- 必须 -->
 <script type="text/javascript">
-  var imgPath = '/Public/';
+  var imgPath = '/uteach/Public/';
 </script>
-<script src="/Public/js/jquery-1.8.3.min.js"></script>
-<script src="/Public/js/jquery.easing.min.js" type="text/javascript"></script> 
-<script language="javascript" src="/Public/js/custom.js"></script> 
-<script src="/Public/js/choose.js" type="text/javascript"></script>
-<script src="/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=igreen"></script>
+<script src="/uteach/Public/js/jquery-1.8.3.min.js"></script>
+<script src="/uteach/Public/js/jquery.easing.min.js" type="text/javascript"></script> 
+<script language="javascript" src="/uteach/Public/js/custom.js"></script> 
+<script src="/uteach/Public/js/choose.js" type="text/javascript"></script>
+<script src="/uteach/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/uteach/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=igreen"></script>
 
 <script>
 
@@ -78,12 +79,12 @@ webkit-box-shadow:1px 1px 6px #606060;
 
   <div id="show1" >
     <div class="show2">
-      <i><img src="/Public/images/index/dot1.png" width="24" height="13" /></i>
+      <i><img src="/uteach/Public/images/index/dot1.png" width="24" height="13" /></i>
         <ul class="clear">
-          <li><a href="<?php echo U('Write/index');?>"><img src="/Public/images/index/icon1_small.png" width="52" height="52" /><span>编题</span></a></li>
-          <li><a href="<?php echo U('Volume/index');?>"><img src="/Public/images/index/icon2_small.png" width="52" height="52" /><span>会考</span></a></li>
-          <li><a href="<?php echo U('User/index');?>"><img src="/Public/images/index/icon3_small.png" width="52" height="52" /><span>设置</span></a></li>
-          <li><a href="<?php echo U('Index/index');?>"  class="back_index"><img src="/Public/images/index/icon4_small.png" width="52" height="52" /><span>首页</span></a></li>
+          <li><a href="<?php echo U('Write/index');?>"><img src="/uteach/Public/images/index/icon1_small.png" width="52" height="52" /><span>编题</span></a></li>
+          <li><a href="<?php echo U('Volume/index');?>"><img src="/uteach/Public/images/index/icon2_small.png" width="52" height="52" /><span>会考</span></a></li>
+          <li><a href="<?php echo U('User/index');?>"><img src="/uteach/Public/images/index/icon3_small.png" width="52" height="52" /><span>设置</span></a></li>
+          <li><a href="<?php echo U('Index/index');?>"  class="back_index"><img src="/uteach/Public/images/index/icon4_small.png" width="52" height="52" /><span>首页</span></a></li>
         </ul>
     </div>
   </div>
@@ -104,7 +105,7 @@ $(function(){
 
 	 var timer=setInterval(function(){
 	 	var epaperId = $('#epaperId').val()
-		$.get('/index.php/Home/Choose/epaper',function(data){
+		$.get('/uteach/index.php/Home/Choose/epaper',function(data){
 			if('data==1'){
 				/*location.href=showEpaper+'?epaperId='+epaperId;*/
 			}else{
@@ -117,7 +118,7 @@ $(function(){
 	$('.increases').on('click',function(){
 		clearInterval(timer)
 		 var epaperId = $('#epaperId').val()
-		$.post('/index.php/Home/Choose/epaper',function(data){
+		$.post('/uteach/index.php/Home/Choose/epaper',function(data){
 			if('data==1'){
 				location.href=increasesUrl+'?epaperId='+epaperId;
 			}else{
@@ -133,7 +134,7 @@ $(function(){
 	<ul class="menu">
 		<li class="li_3">试题<span class="count1"><?php if($count == '' ): ?>0<?php else: echo ($count); endif; ?></span>
 			<dl class="li_3_content">
-				<img src="/Public/images/index/dot1.png" width="23"height="12"class="Triangle_con"/>
+				<img src="/uteach/Public/images/index/dot1.png" width="23"height="12"class="Triangle_con"/>
 				<p style="padding-top: 10px;">
 					<span>选择题：</span><em class="subnavg"><?php echo ($Xcount); ?> </em>/25<!-- <span id="feng_one" class="fengsu">30分<span> -->
 				</p>
@@ -151,7 +152,7 @@ $(function(){
 	</ul>
 
 	<div class="nr_green" style="float: right; margin-right: 39px;">
-		<img src="/Public/images/toux.gif" /> <span SH_NAME="true"><?php echo (session('username')); ?></span>
+		<img src="/uteach/Public/images/toux.gif" /> <span SH_NAME="true"><?php echo (session('username')); ?></span>
 		<ul class="set">
 			<li><a href="<?php echo U('User/index');?>">设置</a></li>
 			<li><a href="<?php echo U('Login/logout');?>" style="border:none">注销</a></li>
@@ -166,7 +167,7 @@ $(function(){
 
 
 <div class="title">
-	<img src="/Public/images/jt.png" /><a href="<?php echo U('index', array('id' => I('get.epaperId')));?>">返回</a>
+	<img src="/uteach/Public/images/jt.png" /><a href="<?php echo U('index', array('id' => I('get.epaperId')));?>">返回</a>
 	<input type="hidden" id="epaperId" value="<?php echo ($epaper["id"]); ?>"/><?php echo ($epaper["header"]); ?><span><?php echo ($epaper["subject"]); ?></span>
 </div>
 			<div class="warp">
@@ -210,7 +211,10 @@ $(function(){
 								<div class="list">
 								 <!--  <input  type='hidden'  class="weight" value="<?php echo ($vo["weight"]); ?>"> -->
 								  <input  type='hidden'  class="testid" value="<?php echo ($vo["id"]); ?>">
-								  <div><?php echo ($vo["test"]); ?></div>
+								  <div>
+                                      <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+                                  </div>
 								 
 								</div>
 								</div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
@@ -230,7 +234,10 @@ $(function(){
 								<div class="list">
 									<!-- <input  type='hidden'  class="weight" value="<?php echo ($vo["weight"]); ?>"> -->
 									 <input  type='hidden'  class="testid" value="<?php echo ($vo["id"]); ?>">
-									 <div><?php echo ($vo["test"]); ?></div> 
+									 <div>
+                                         <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+                                     </div>
 								</div>
 						</div><?php endif; endforeach; endif; else: echo "" ;endif; ?> 
 				</div>
@@ -295,6 +302,8 @@ $(function(){
 	 $(document).ready(function() {
 	//保存
 	$(".demobtn .yes").on('click',function(){
+        //ouyangyu
+        document.getElementById("PageOfficeCtrl1").WebSave();
 		$.post("<?php echo U('Choose/epaper','','');?>",function(data){
 			if(data.status = 1){
 				$("#mask").hide()
@@ -364,7 +373,7 @@ $(function(){
 										})
 										//试卷头更新
 										$('.save_head .yes').on('click',function(){
-											 $.post('/index.php/Home/Choose/save_head',{head:$(".head").val(),subject:$('.subject').val()},function(data){
+											 $.post('/uteach/index.php/Home/Choose/save_head',{head:$(".head").val(),subject:$('.subject').val()},function(data){
 												 if('data==1'){
 													 $('#mask').hide()
 													 $('.save_head').hide()
@@ -376,13 +385,13 @@ $(function(){
 										})
 							}else if($(this).find("div:first").attr("class")=="know"){
 									$(this).addClass("greendi")
-									$(this).append(" <a class='revisebut' onclick='parent.open(\"/index.php/Home/Choose/know/id/<?php echo ($epaper["id"]); ?>\",\"考生须知\",600,400)'>修改</a>")
+									$(this).append(" <a class='revisebut' onclick='parent.open(\"/uteach/index.php/Home/Choose/know/id/<?php echo ($epaper["id"]); ?>\",\"考生须知\",600,400)'>修改</a>")
 							}else if($(this).find("div:first").attr("class")=="type"){
 								$(this).addClass("greendi")
-								$(this).append(" <a class='revisebut' onclick='parent.open(\"/index.php/Home/Choose/alert_type/id/<?php echo ($epaper["id"]); ?>\",\"试题设置\",600,400)'>修改</a>")
+								$(this).append(" <a class='revisebut' onclick='parent.open(\"/uteach/index.php/Home/Choose/alert_type/id/<?php echo ($epaper["id"]); ?>\",\"试题设置\",600,400)'>修改</a>")
 							}else if($(this).find("div:first").attr("class")=="type2"){
 								$(this).addClass("greendi")
-								$(this).append(" <a class='revisebut' onclick='parent.open(\"/index.php/Home/Choose/alert_type2/id/<?php echo ($epaper["id"]); ?>\",\"试题设置\",600,400)'>修改</a>")
+								$(this).append(" <a class='revisebut' onclick='parent.open(\"/uteach/index.php/Home/Choose/alert_type2/id/<?php echo ($epaper["id"]); ?>\",\"试题设置\",600,400)'>修改</a>")
 							}else{
 
 								 	 			$(this).addClass("greendi")
@@ -390,7 +399,7 @@ $(function(){
 												  var That1=$(this)
 												  That1.find("ul li").eq(0).on("click",function(event){
 													var id=That1.find('.testid').val()
-													  parent.open('/index.php/Home/Choose/alert_replace?id='+id,'试题替换',700,600)
+													  parent.open('/uteach/index.php/Home/Choose/alert_replace?id='+id,'试题替换',700,600)
 												  })
 
 
@@ -411,7 +420,7 @@ $(function(){
 												} 
 											  
 											  That1.remove()
-													 $.post('/index.php/Home/Choose/get_all_id',{all_id:$("#all_id").val()},function(){
+													 $.post('/uteach/index.php/Home/Choose/get_all_id',{all_id:$("#all_id").val()},function(){
 														 if('data==1'){
 															 location.reload() 
 														 }
@@ -425,7 +434,7 @@ $(function(){
   												That1.prev().before(That1)
   												  sort_PX()
   												  get_all_id()
-  												  $.post('/index.php/Home/Choose/get_all_id',{all_id:$("#all_id").val()})
+  												  $.post('/uteach/index.php/Home/Choose/get_all_id',{all_id:$("#all_id").val()})
 											  }
 											   
 										  })
@@ -437,7 +446,7 @@ $(function(){
   												That1.next().after(That1)
   												  sort_PX()
   												  get_all_id()
-  												   $.post('/index.php/Home/Choose/get_all_id',{all_id:$("#all_id").val()})
+  												   $.post('/uteach/index.php/Home/Choose/get_all_id',{all_id:$("#all_id").val()})
 											  }
 											  
 										  })
@@ -502,4 +511,12 @@ $(function(){
 		 }); 
 
 </script>
-</body></html>
+<form id="form1">
+    <div style="width: 0px; height: 0px;">
+        <!--**************   PageOffice 客户端代码开始    ************************-->
+        <?php echo $PageOfficeCtrl->getDocumentView("PageOfficeCtrl1") ?>
+        <!--**************   PageOffice 客户端代码结束    ************************-->
+    </div>
+</form>
+</body>
+</html>

@@ -58,12 +58,18 @@
         <div id="sroll_box">
             <div class="con2">
             	<!--{$date.test}-->
-                <iframe  src="/uteach/Word/doc/9/20151031/{$date.test}.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+                <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$date.wtime|date='Ymd',###}/{$date.test}.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
 
             </div>
             <div class="con3">
-            	<div>答案：{$date.answer}</div>
-                <div>解析：{$date.analytical}</div>
+            	<div>答案：
+                    <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$date.wtime|date='Ymd',###}/{$date.answer}.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+
+                </div>
+                <div>解析：
+                    <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$date.wtime|date='Ymd',###}/{$date.analytical}.htm" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+
+                </div>
                 <div>备注：<p>{$date.remarks}</p></div>
             </div>
 

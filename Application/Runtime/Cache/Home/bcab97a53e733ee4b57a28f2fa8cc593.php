@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <link rel="Stylesheet" type="text/css" href="/Public/css/popstyle.css" />
-    <script type="text/javascript" src="/Public/js/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="/Public/js/choose.js"></script>
+    <link rel="Stylesheet" type="text/css" href="/uteach/Public/css/popstyle.css" />
+    <script type="text/javascript" src="/uteach/Public/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/uteach/Public/js/choose.js"></script>
 <script>
 var getKonw="<?php echo U('Choose/know','','');?>";
 var getNote="<?php echo U('Choose/noteUpdate','','');?>";

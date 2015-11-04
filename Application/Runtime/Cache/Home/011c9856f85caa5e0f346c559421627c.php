@@ -3,21 +3,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>指南树</title>
-<link rel="stylesheet" type="text/css" href="/Public/css/slick.css"/>
-<link rel="stylesheet" type="text/css" href="/Public/css/layout.css"/>
-<link rel="stylesheet" type="text/css" href="/Public/css/xlmenu.css"/>
-<link rel="stylesheet" type="text/css" href="/Public/css/common.css"/>
-<link rel="stylesheet" href="/Public/css/lrtkfy.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/xlmenu.css"/>
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/common.css"/>
+<link rel="stylesheet" href="/uteach/Public/css/lrtkfy.css" type="text/css" />
 <script type="text/javascript">
-  var imgPath = '/Public/';
+  var imgPath = '/uteach/Public/';
 </script>
-<script src="/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script> 
-<script src="/Public/js/jquery.backgroundpos.js" type="text/javascript"></script>
-<script src="/Public/js/jquery.easing.min.js" type="text/javascript"></script> 
-<script src="/Public/js/choose.js" type="text/javascript"></script>
-<script type="text/javascript" src="/Public/js/slick.js"></script>
-<script src="/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=igreen"></script>
+<script src="/uteach/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script> 
+<script src="/uteach/Public/js/jquery.backgroundpos.js" type="text/javascript"></script>
+<script src="/uteach/Public/js/jquery.easing.min.js" type="text/javascript"></script> 
+<script src="/uteach/Public/js/choose.js" type="text/javascript"></script>
+<script type="text/javascript" src="/uteach/Public/js/slick.js"></script>
+<script src="/uteach/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/uteach/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=igreen"></script>
 <script type="text/javascript">
 	var showEpaper="<?php echo U('Choose/show','','');?>";
    $(document).ready(function() {
@@ -73,7 +73,7 @@ $(function(){
 	$('.increases').on('click',function(){
 		// clearInterval(timer) 
 		 var epaperId = $('#epaperId').val()
-		$.post('/index.php/Home/Choose/epaper',function(data){
+		$.post('/uteach/index.php/Home/Choose/epaper',function(data){
 			if('data==1'){
 				location.href=showEpaper+'?epaperId='+epaperId;
 			}else{
@@ -93,12 +93,12 @@ $(function(){
 	</div>
 	<div id="show1" >
 	  <div class="show2">
-	    <i style="top:0"><img src="/Public/images/index/dot1.png" width="24" height="13" /></i>
+	    <i style="top:0"><img src="/uteach/Public/images/index/dot1.png" width="24" height="13" /></i>
 	      <ul class="clear">
-	        <li><a href="<?php echo U('Write/index');?>"><img src="/Public/images/index/icon1_small.png" width="52" height="52" /><span>编题</span></a></li>
-	        <li><a href="<?php echo U('Volume/index');?>"><img src="/Public/images/index/icon2_small.png" width="52" height="52" /><span>会考</span></a></li>
-	        <li><a href="<?php echo U('User/index');?>"><img src="/Public/images/index/icon3_small.png" width="52" height="52" /><span>设置</span></a></li>
-	        <li><a href="<?php echo U('Index/index');?>"  class="back_index"><img src="/Public/images/index/icon4_small.png" width="52" height="52" /><span>首页</span></a></li>
+	        <li><a href="<?php echo U('Write/index');?>"><img src="/uteach/Public/images/index/icon1_small.png" width="52" height="52" /><span>编题</span></a></li>
+	        <li><a href="<?php echo U('Volume/index');?>"><img src="/uteach/Public/images/index/icon2_small.png" width="52" height="52" /><span>会考</span></a></li>
+	        <li><a href="<?php echo U('User/index');?>"><img src="/uteach/Public/images/index/icon3_small.png" width="52" height="52" /><span>设置</span></a></li>
+	        <li><a href="<?php echo U('Index/index');?>"  class="back_index"><img src="/uteach/Public/images/index/icon4_small.png" width="52" height="52" /><span>首页</span></a></li>
 	      </ul>
 	  </div>
 	</div>
@@ -152,7 +152,7 @@ $(function(){
 		<li class="li_3">试题<span class="count1" id="total"><?php echo ($count); ?></span>
 			<dl class="li_3_content">
 				<!-- <span class="Triangle_con"></span> -->
-				<img src="/Public/images/index/dot1.png" width="23"height="12"class="Triangle_con"/>
+				<img src="/uteach/Public/images/index/dot1.png" width="23"height="12"class="Triangle_con"/>
 				<p style="padding-top: 10px;">
 					<span>选择题：</span><em class="subnavg" id="total_xz"><?php if($Xcount == '' ): ?>0<?php else: echo ($Xcount); endif; ?> </em>/25
 				</p>
@@ -169,7 +169,7 @@ $(function(){
 	</ul>
 
 	<div class="nr_green" style="float: right; margin-right: 39px;" >
-		<img src="/Public/images/toux.gif" /> <span SH_NAME='true'><?php echo (session('username')); ?></span>
+		<img src="/uteach/Public/images/toux.gif" /> <span SH_NAME='true'><?php echo (session('username')); ?></span>
 		<ul class="set">
 			<li><a href="<?php echo U('User/index');?>">设置</a></li>
 			<li><a href="<?php echo U('Login/logout');?>" style="border:none">注销</a></li>
@@ -182,7 +182,7 @@ $(function(){
 <div class="shadow"></div>
 	<script>
 var getZid="<?php echo U('Choose/show_ChLeft','','');?>";
- var id='/index.php/home/Choose/main_content.html'; 
+ var id='/uteach/index.php/home/Choose/main_content.html'; 
 </script>
 <div id="middle">
       <div class="contain1">
@@ -197,7 +197,7 @@ var getZid="<?php echo U('Choose/show_ChLeft','','');?>";
 		<input type="hidden" name="zsid"id="zsid" value="" />
 		<ul class="chem_list">
 			<?php if(is_array($category)): $i = 0; $__LIST__ = $category;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vvo): $mod = ($i % 2 );++$i;?><li><a class="fid"><span style="display: none;"><?php echo ($vvo["id"]); ?></span><?php echo ($vvo["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
-			<i><img src="/Public/images/index/dot1.png" width="13"height="8" /></i>
+			<i><img src="/uteach/Public/images/index/dot1.png" width="13"height="8" /></i>
 		</ul>
 		<div id="a">
 			<?php if(is_array($chapter)): $i = 0; $__LIST__ = $chapter;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><p class="menu_head zid">
@@ -213,7 +213,7 @@ var getZid="<?php echo U('Choose/show_ChLeft','','');?>";
 </div>
 
 
-	<iframe src="/index.php/home/Choose/main_content.html" frameborder="0" style="float:right;width:calc(100% - 280px);height:100%;" id="right_bt"></iframe> 
+	<iframe src="/uteach/index.php/home/Choose/main_content.html" frameborder="0" style="float:right;width:calc(100% - 280px);height:100%;" id="right_bt"></iframe> 
 	</div>
 
 </div>

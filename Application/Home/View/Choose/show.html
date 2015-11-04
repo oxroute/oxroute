@@ -1,3 +1,85 @@
+<?php
+    $ip = $_SERVER['SERVER_NAME'];//获取本机IP
+	require_once("http://".$ip.":8080/JavaBridge/java/Java.inc");//此行必须
+    $PageOfficeCtrl = new Java("com.zhuozhengsoft.pageoffice.PageOfficeCtrlPHP");//此行必须
+    $PageOfficeCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz");//此行必须，设置服务器页面
+
+    java_set_file_encoding("UTF-8");//设置中文编码，若涉及到中文必须设置中文编码
+    $doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument");//声明WordDocument变量
+    $dataRegionInsertType = new Java("com.zhuozhengsoft.pageoffice.wordwriter.DataRegionInsertType");
+
+    //先在要插入word文件的位置手动插入书签,书签必须以“PO_”为前缀
+    //给DataRegion赋值,值的形式为："[word]word文件路径[/word]、[excel]excel文件路径[/excel]、[image]图片路径[/image]"
+    //$header =  $doc->createDataRegion("PO_header1",$dataRegionInsertType->After,"PO_header");
+    $header = $doc->openDataRegion("PO_header");
+    $header->setValue($epaper['header']);
+
+    $subject =  $doc->openDataRegion("PO_subject");
+    $subject->setValue($epaper['subject']);
+
+    //$know =  $doc->createDataRegion("PO_know1",$dataRegionInsertType->After,"PO_know");
+    $know = $doc->openDataRegion("PO_know");
+    $knowStr = str_replace("|","\r\n",$epaper['know']);
+    $know->setValue($knowStr);
+
+    $note =  $doc->openDataRegion("PO_note");
+    $note->setValue($epaper['note']);
+
+    $onetype = $doc->openDataRegion("PO_onetype");
+    //$onetype =  $doc->createDataRegion("PO_onetype",$dataRegionInsertType->After,"PO_onetype");
+    $onetypeStr = str_replace("|","\r\n",$epaper['one_type']);
+    $onetype->setValue($onetypeStr);
+
+    //$twotype =  $doc->createDataRegion("PO_twotype1",$dataRegionInsertType->After,"PO_twotype");
+    $twotype = $doc->openDataRegion("PO_twotype");
+    $twotypeStr = str_replace("|","\r\n",$epaper['two_type']);
+    $twotype->setValue($twotypeStr);
+    $oneContext = "PO_onetcontext";
+    $twotContext = "PO_twotcontext";
+    $select = "PO_one";
+    $tiankong = "PO_two";
+    foreach($list as $vo){
+
+        if ($vo['questions'] == "选择题"){
+            $selectvar = $select.$vo['id'];
+            $one1 =  $doc->createDataRegion($selectvar,$dataRegionInsertType->After,$oneContext);
+            $one1->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$vo['wtime'])."/".$vo['test'].".doc[/word]\r\n");
+            $oneContext = $selectvar;
+        }else{
+            $tiankongvar = $tiankong.$vo['id'];
+            $two1 =  $doc->createDataRegion($tiankongvar,$dataRegionInsertType->After,$twotContext);
+
+            $two1->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$vo['wtime'])."/".$vo['test'].".doc[/word]\r\n");
+            $twotContext = $tiankongvar;
+        }
+    }
+    /*$one1 =  $doc->createDataRegion("PO_one1",$dataRegionInsertType->After,"PO_onetcontext");
+    //设置创建的数据区域的可编辑性
+    //$dataRegion1->setEditing(true);
+    //给数据区域赋值
+    $one1->setValue("[word]doc/1.doc[/word]\r\n");
+
+    $two2 = $doc->createDataRegion("PO_two1",$dataRegionInsertType->After,"PO_twotcontext");
+//$dataRegion2->setEditing(true);
+    $two2->setValue("[word]doc/2.doc[/word]\r\n");
+    $two3 = $doc->createDataRegion("PO_two2",$dataRegionInsertType->After,"PO_two1");
+    $two3->setValue("[word]doc/3.doc[/word]\r\n");*/
+
+    $PageOfficeCtrl->setWriter($doc);
+
+//$PageOfficeCtrl->setCaption("演示：后台编程插入Word文件到数据区域");
+
+//隐藏菜单栏
+$PageOfficeCtrl->setMenubar(false);
+//隐藏自定义工具栏
+$PageOfficeCtrl->setCustomToolbar(false);
+$PageOfficeCtrl->setSaveFilePage("/uteach/Word/SavePage.php?id=".$_SESSION['uid']);
+$PageOfficeCtrl->addCustomToolButton("保存","Save",1);
+//打开Word文档
+$PageOfficeCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];//若使用谷歌浏览器此行代码必须有，其他浏览器此行代码可不加
+$OpenMode = new Java("com.zhuozhengsoft.pageoffice.OpenModeType");
+$PageOfficeCtrl->webOpen($pagePath, $OpenMode->docNormalEdit, "张三");//此行必须
+?>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -152,7 +234,10 @@ webkit-box-shadow:1px 1px 6px #606060;
 								<div class="list">
 								 <!--  <input  type='hidden'  class="weight" value="{$vo.weight}"> -->
 								  <input  type='hidden'  class="testid" value="{$vo.id}">
-								  <div>{$vo.test}</div>
+								  <div>
+                                      <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$vo.wtime|date='Ymd',###}/{$vo.test}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+                                  </div>
 								 
 								</div>
 								</div>
@@ -176,7 +261,10 @@ webkit-box-shadow:1px 1px 6px #606060;
 								<div class="list">
 									<!-- <input  type='hidden'  class="weight" value="{$vo.weight}"> -->
 									 <input  type='hidden'  class="testid" value="{$vo.id}">
-									 <div>{$vo.test}</div> 
+									 <div>
+                                         <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$vo.wtime|date='Ymd',###}/{$vo.test}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+                                     </div>
 								</div>
 						</div>
 						</if>
@@ -243,6 +331,8 @@ webkit-box-shadow:1px 1px 6px #606060;
 	 $(document).ready(function() {
 	//保存
 	$(".demobtn .yes").on('click',function(){
+        //ouyangyu
+        document.getElementById("PageOfficeCtrl1").WebSave();
 		$.post("{:U('Choose/epaper','','')}",function(data){
 			if(data.status = 1){
 				$("#mask").hide()
@@ -450,4 +540,12 @@ webkit-box-shadow:1px 1px 6px #606060;
 		 }); 
 
 </script>
-</body></html>
+<form id="form1">
+    <div style="width: 0px; height: 0px;">
+        <!--**************   PageOffice 客户端代码开始    ************************-->
+        <?php echo $PageOfficeCtrl->getDocumentView("PageOfficeCtrl1") ?>
+        <!--**************   PageOffice 客户端代码结束    ************************-->
+    </div>
+</form>
+</body>
+</html>

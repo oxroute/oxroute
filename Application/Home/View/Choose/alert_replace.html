@@ -52,8 +52,10 @@ $(function(){
 <span style="width:100px">题型：{$vo.questions}</span>
 <span style="float:right;max-width:100px">来源：{$vo.source}</span>
 </div> 
-<div class="popcon">{$vo.test}
-<input name="" type="button" class="popbut" value="替换本题" />
+<div class="popcon">
+    <iframe  src="/uteach/Word/doc/{$_SESSION['uid']}/{$vo.wtime|date='Ymd',###}/{$vo.test}.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+    <input name="" type="button" class="popbut" value="替换本题" />
 </div>
 <p class="popgreen">正确答案：{$vo.answer}</p>
 <!-- <div class="popconnti">详细解析</div> -->

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); $ip = GetHostByName($_SERVER['SERVER_NAME']); require_once("http://".$ip.":8080/JavaBridge/java/Java.inc"); if(!empty($test)){ $FileMakerCtrl = new Java("com.zhuozhengsoft.pageoffice.FileMakerCtrlPHP"); $FileMakerCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz"); java_set_file_encoding("GBK"); $id = $_SESSION['uid']; $filepath="/uteach/Word/doc/".$id."/".date('Ymd',time()); $type = $test; $doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument"); $doc->setDisableWindowRightClick(true); $FileMakerCtrl->setSaveFilePage("/uteach/Word/SaveMaker.php?id=".$id."&type=".$type); $FileMakerCtrl->setWriter($doc); $FileMakerCtrl->setJsFunction_OnProgressComplete("OnProgressComplete()"); $DocumentOpenType = new Java("com.zhuozhengsoft.pageoffice.DocumentOpenType"); $FileMakerCtrl->fillDocument($filepath."/".$type.".doc", $DocumentOpenType->Word); echo $FileMakerCtrl->getDocumentView("FileMakerCtrl1"); } ?>
+<?php if (!defined('THINK_PATH')) exit();?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -74,10 +74,10 @@
 	
     </script>
 </head>
-<body style='background:##eaeaea'>
+<body style='background:#eaeaea'>
 <table cellpadding="0" cellspacing="0" width="100%" style='background:#eaeaea' id="main">
-	<tr>
-		<script>
+    <tr>
+        <script>
 var getZid="<?php echo U('Write/showLeft','','');?>";
 var id='/uteach/index.php/home/Public/main_content.html';
 </script>
@@ -170,8 +170,8 @@ var id='/uteach/index.php/home/Public/main_content.html';
 
 
         <td id="index_right" style="" >
-      
-        					<div class="user_tit">
+
+            					<div class="user_tit">
 						<h2>閫夋嫨鏉ユ簮</h2>
 						<ul id="tab1">
 							<Li><a class="gettype" href="javascript:void(0)">棰樺瀷</a>
@@ -225,21 +225,39 @@ var id='/uteach/index.php/home/Public/main_content.html';
 
 
 
-     
-		<iframe src="/uteach/index.php/home/Public/main_content.html" frameborder="1" style="width:100%;margin-top:-9px" id="right_bt"></iframe>   
 
-			
-      	</td>
+            <iframe src="/uteach/index.php/home/Public/main_content.html" frameborder="1" style="width:100%;margin-top:-9px" id="right_bt"></iframe>
+
+
+        </td>
     </tr>
 </table>
-<script language="javascript" type="text/javascript">
-	function OnProgressComplete() {
-		document.getElementById("FileMakerCtrl1").WebSaveAsHTML();
-		//window.parent.myFunc(); //调用父页面的js函数
-	}
-	
 
-</script>
+<form id="form1">
+<?php
+if(!empty($test)){ ?>
+    <div style="width: 1px; height: 1px; overflow: hidden;">
+        <iframe id="iframe1" name="iframe1" src="http://172.19.43.94/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($test); ?>"></iframe>
+    </div>
+<?php
+} if(!empty($answer)){ ?>
+    <div style="width: 1px; height: 1px; overflow: hidden;">
+        <iframe id="iframe2" name="iframe2" src="http://172.19.43.94/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($answer); ?>"></iframe>
+    </div>
+
+<?php
+} if(!empty($analytical)){ ?>
+    <div style="width: 1px; height: 1px; overflow: hidden;">
+        <iframe id="iframe3" name="iframe3" src="http://172.19.43.94/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($analytical); ?>"></iframe>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        var url="<?php echo U('Write/index');?>";
+        //location.href = url;
+        </script>
+<?php
+} ?>
+</form>
 
 
 </body>

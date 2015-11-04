@@ -2,9 +2,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>jquery弹出层</title>
-<link rel="stylesheet" href="/Public/css/lrtkfy.css" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/Public/css/popstyle.css"/>
-<script src="/Public/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="/uteach/Public/css/lrtkfy.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/popstyle.css"/>
+<script src="/uteach/Public/js/jquery-1.8.3.min.js"></script>
 <style>
 	body{padding: 0;margin: 0}
 </style>
@@ -36,14 +36,19 @@ $(function(){
 <span title="a"style="width:50px;">难度：a</span>
 <span style="float:right;max-width:100px">来源：<?php echo ($vo["source"]); ?></span>
 </div> 
-<div class="popcon"><?php echo ($vo["test"]); ?>
-<input name="" type="button" class="popbut" value="添加试题" />
+<div class="popcon">
+    <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+    <input name="" type="button" class="popbut" value="添加试题" />
 </div>
-<p class="popgreen">正确答案：<?php echo ($vo["answer"]); ?></p>
+<p class="popgreen">正确答案：
+    <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["answer"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+</p>
 <div class="popconnti">详细解析</div>
 </div>
 <div class="content_xq">
-			<?php echo (htmlspecialchars_decode($vo["analytical"])); ?>
+    <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["analytical"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
 		</div><?php endforeach; endif; else: echo "" ;endif; ?>
 
 <!-- <div id="mask1"></div>

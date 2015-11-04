@@ -3,23 +3,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>test</title>
-<link rel="stylesheet" type="text/css" href="/Public/css/slick.css"/>
-<link rel="stylesheet" type="text/css" href="/Public/css/layout.css"/>
-<link rel="stylesheet" type="text/css" href="/Public/css/xlmenu.css"/>
-<link rel="stylesheet" type="text/css" href="/Public/css/common.css"/>
-<link rel="stylesheet" href="/Public/css/lrtkfy.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/xlmenu.css"/>
+<link rel="stylesheet" type="text/css" href="/uteach/Public/css/common.css"/>
+<link rel="stylesheet" href="/uteach/Public/css/lrtkfy.css" type="text/css" />
 <script type="text/javascript">
-  var imgPath = '/Public/';
+  var imgPath = '/uteach/Public/';
 </script>
-<script src="/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script> 
-<script src="/Public/js/choose.js" type="text/javascript"></script>
+<script src="/uteach/Public/js/jquery-1.8.3.min.js" type="text/javascript"></script> 
+<script src="/uteach/Public/js/choose.js" type="text/javascript"></script>
 
- <script type="text/javascript" src="/Public/js/slick.js"></script>
-<!-- <script type="text/javascript" src="/Public/js/scripts.js"></script>  -->
-<script src="/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=igreen"></script>
-<script type="text/javascript" src="/Public/js/velocity.min.js"></script>
-<script type="text/javascript" src="/Public/js/velocity.ui.min.js"></script>
+ <script type="text/javascript" src="/uteach/Public/js/slick.js"></script>
+<!-- <script type="text/javascript" src="/uteach/Public/js/scripts.js"></script>  -->
+<script src="/uteach/Public/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/uteach/Public/js/lhgdialog/lhgdialog.min.js?self=true&skin=igreen"></script>
+<script type="text/javascript" src="/uteach/Public/js/velocity.min.js"></script>
+<script type="text/javascript" src="/uteach/Public/js/velocity.ui.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function() {
   		var nice = $("html").niceScroll();  // The document page (body)
@@ -56,7 +56,7 @@
 		$(document).on("click",".add", function(){
 			clone_element($(this).parent().parent(),$(this))
 			var That=this;
-			$.get('/index.php/Home/Choose/addId',{id:$(this).parent().parent().find('.id').val()},function(data){
+			$.get('/uteach/index.php/Home/Choose/addId',{id:$(this).parent().parent().find('.id').val()},function(data){
 				if (data.status == 1) {
 					$(That).parent().parent().removeClass('mainlist').addClass('mainlistg');
 					$(That).removeClass('add').addClass('subtract').val("移除");
@@ -108,7 +108,7 @@ var That=this;
         }, {
              duration: 900,
             complete: function(elements) {
-              $.get('/index.php/Home/Choose/editId',{id:$(That).parent().parent().find('.id').val()},function(data){
+              $.get('/uteach/index.php/Home/Choose/editId',{id:$(That).parent().parent().find('.id').val()},function(data){
                 if(data.status == 1){
                   $(That).parent().parent().removeClass('mainlistg').addClass('mainlist');
                   $(That).removeClass('subtract').addClass('add').val("添加")
@@ -163,8 +163,8 @@ var That=this;
     }
 	function R_alert(msg) {
 	    close();
-          // window.location.href = '/index.php/Home/Choose';
-	    $.dialog.tips(msg,2,'/Public/images/loading.gif');
+          // window.location.href = '/uteach/index.php/Home/Choose';
+	    $.dialog.tips(msg,2,'/uteach/Public/images/loading.gif');
 	   $('#right_bt').attr("src",$('#right_bt').attr("src"))
 	}
 
@@ -178,20 +178,23 @@ var That=this;
 <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(in_array(($vo["id"]), is_array($_SESSION['testid'])?$_SESSION['testid']:explode(',',$_SESSION['testid']))): ?><div class="mainlistg">
      <div class="zj_btn">
        <input type="button" class="subtract"  value="移除">
-       <input type="button" class="yuliansubtract" value="预览" onclick="parent.open('/index.php/Home/Choose/alert_edit/id/<?php echo ($vo["id"]); ?>','移除预览',900,600);">
-       <input style="display:none" type="button" class="yulianadd" value="预览" onclick="parent.open('/index.php/Home/Choose/alert_preview/id/<?php echo ($vo["id"]); ?>','添加预览',900,600);">
+       <input type="button" class="yuliansubtract" value="预览" onclick="parent.open('/uteach/index.php/Home/Choose/alert_edit/id/<?php echo ($vo["id"]); ?>','移除预览',900,600);">
+       <input style="display:none" type="button" class="yulianadd" value="预览" onclick="parent.open('/uteach/index.php/Home/Choose/alert_preview/id/<?php echo ($vo["id"]); ?>','添加预览',900,600);">
      </div>
-     <?php if($vo["questions"] == 填空题): ?><img class="show biao" src="/Public/images/tianb.png"/>
-	   		<img style="dispaly:none"class="checked biao" src="/Public/images/tiangray.png"/>
+     <?php if($vo["questions"] == 填空题): ?><img class="show biao" src="/uteach/Public/images/tianb.png"/>
+	   		<img style="dispaly:none"class="checked biao" src="/uteach/Public/images/tiangray.png"/>
    		<?php elseif($vo["questions"] == 选择题): ?> 
-	   		<img class="show biao" src="/Public/images/xuan.png"/>
-	   		<img style="dispaly:none"class="checked biao" src="/Public/images/xuangray.png"/>
+	   		<img class="show biao" src="/uteach/Public/images/xuan.png"/>
+	   		<img style="dispaly:none"class="checked biao" src="/uteach/Public/images/xuangray.png"/>
    		<?php else: ?>
-   			<img class="show biao" src="/Public/images/jian.png"/>
-   			<img style="dispaly:none" class="checked biao" src="/Public/images/jiangray.png"/><?php endif; ?>
+   			<img class="show biao" src="/uteach/Public/images/jian.png"/>
+   			<img style="dispaly:none" class="checked biao" src="/uteach/Public/images/jiangray.png"/><?php endif; ?>
      
      <input type="hidden" name="id" class="id" value="<?php echo ($vo["id"]); ?>"/>
-     <div><?php echo ($vo["test"]); ?></div>
+     <div>
+         <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+     </div>
  </div>
 		
 <?php else: ?>
@@ -199,22 +202,25 @@ var That=this;
 		
       <div class="zj_btn" >
         <input type="button" class="add" value="添加">
-        <input type="button" class="yuliansubtract" value="预览" onclick="parent.open('/index.php/Home/Choose/alert_edit/id/<?php echo ($vo["id"]); ?>','移除预览',900,600);" style="display:none">
-        <input type="button" class="yulianadd" value="预览" onclick="parent.open('/index.php/Home/Choose/alert_preview/id/<?php echo ($vo["id"]); ?>','添加预览',900,600);">
+        <input type="button" class="yuliansubtract" value="预览" onclick="parent.open('/uteach/index.php/Home/Choose/alert_edit/id/<?php echo ($vo["id"]); ?>','移除预览',900,600);" style="display:none">
+        <input type="button" class="yulianadd" value="预览" onclick="parent.open('/uteach/index.php/Home/Choose/alert_preview/id/<?php echo ($vo["id"]); ?>','添加预览',900,600);">
       </div>
 
 
-   		<?php if($vo["questions"] == 填空题): ?><img class="show_left biao" src="/Public/images/tianb.png"/>
-	   		<img style="dispaly:none"class="checked_left biao" src="/Public/images/tiangray.png"/>
+   		<?php if($vo["questions"] == 填空题): ?><img class="show_left biao" src="/uteach/Public/images/tianb.png"/>
+	   		<img style="dispaly:none"class="checked_left biao" src="/uteach/Public/images/tiangray.png"/>
    		<?php elseif($vo["questions"] == 选择题): ?> 
-	   		<img class="show_left biao" src="/Public/images/xuan.png"/>
-	   		<img style="dispaly:none"class="checked_left biao" src="/Public/images/xuangray.png"/>
+	   		<img class="show_left biao" src="/uteach/Public/images/xuan.png"/>
+	   		<img style="dispaly:none"class="checked_left biao" src="/uteach/Public/images/xuangray.png"/>
    		<?php else: ?>
-   			<img class="show_left biao" src="/Public/images/jian.png"/>
-   			<img style="dispaly:none" class="checked_left biao" src="/Public/images/jiangray.png"/><?php endif; ?>
+   			<img class="show_left biao" src="/uteach/Public/images/jian.png"/>
+   			<img style="dispaly:none" class="checked_left biao" src="/uteach/Public/images/jiangray.png"/><?php endif; ?>
    		<input type="hidden" name="id" class="id" value="<?php echo ($vo["id"]); ?>"/>
    		
-       <div><?php echo ($vo["test"]); ?></div>
+       <div>
+           <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+       </div>
      </div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
 <!-- <div class="pagnation" id="pagnation" style="border:none;"><?php echo ($page); ?></div>
 
@@ -232,7 +238,7 @@ var That=this;
 						// 组卷左上角的下拉
 			window_iframe.find('#show1').hide(300);
 			window_iframe.find('#zhujiu_set').attr("SH_HUI",true)
-			window_iframe.find('#zhujiu_set').css({background : "url('/Public/images/index/z_dot1.png') no-repeat scroll right center,url('/Public/images/zhujiu_logo.png') no-repeat scroll left center"})
+			window_iframe.find('#zhujiu_set').css({background : "url('/uteach/Public/images/index/z_dot1.png') no-repeat scroll right center,url('/uteach/Public/images/zhujiu_logo.png') no-repeat scroll left center"})
 
 			// 组卷模块
 			window_iframe.find("#zhujiun_xuti").attr("SH_XUANTI",true);
@@ -240,7 +246,7 @@ var That=this;
 
 			window_iframe.find('.nr_green span').attr("SH_NAME",true)
 			window_iframe.find('.set').slideUp(300);
-			window_iframe.find('.nr_green span').css({background : "url('/Public/images/index/name_up.png') no-repeat right center"})
+			window_iframe.find('.nr_green span').css({background : "url('/uteach/Public/images/index/name_up.png') no-repeat right center"})
 
 
 			// 题型 难度   出题人 收起

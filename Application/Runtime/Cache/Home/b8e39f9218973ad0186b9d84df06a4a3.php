@@ -90,7 +90,9 @@ var delUrl="<?php echo U('Public/del','','');?>";
 	<dt>
 		<a href="javascript:void(0);" onclick="parent.open('/uteach/index.php/Home/Public/show/id/<?php echo ($vo["id"]); ?>','',900,600);" style="width: 100%;height: 90px">
 		<input id="delId" type="hidden" value="<?php echo ($vo["id"]); ?>">
-			<div>			<iframe  src="/uteach/Word/doc/9/20151031/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+			<div>
+
+                <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
 			</div>
 	</a></dt>
 	<dd>   

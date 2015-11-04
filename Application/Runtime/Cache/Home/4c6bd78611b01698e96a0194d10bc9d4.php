@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 </head>
-	<script type="text/javascript" src="/Public/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/uteach/Public/js/jquery-1.8.3.min.js"></script>
 	<script>
 	$(function(){
 			$("#st_set td input").focus(function(){

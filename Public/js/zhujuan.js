@@ -311,6 +311,7 @@ function change_text_2(obj){
 	})
 
 	$(document).on("click",function(){
+
 		$(".contain12 ul li").css({background:"none"})
 		$(".contain12 ul li").find("p").removeClass("docgree")
 		$("#fixed_bag .fixed_bag_pic").removeClass("fixed_bag_active")
