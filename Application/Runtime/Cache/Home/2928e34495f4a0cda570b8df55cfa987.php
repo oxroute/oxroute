@@ -237,18 +237,18 @@ var id='/uteach/index.php/home/Public/main_content.html';
 <?php
 if(!empty($test)){ ?>
     <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe1" name="iframe1" src="http://172.19.43.94/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($test); ?>"></iframe>
+        <iframe id="iframe1" name="iframe1" src="http://192.168.0.105/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($test); ?>"></iframe>
     </div>
 <?php
 } if(!empty($answer)){ ?>
     <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe2" name="iframe2" src="http://172.19.43.94/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($answer); ?>"></iframe>
+        <iframe id="iframe2" name="iframe2" src="http://192.168.0.105/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($answer); ?>"></iframe>
     </div>
 
 <?php
 } if(!empty($analytical)){ ?>
     <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe3" name="iframe3" src="http://172.19.43.94/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($analytical); ?>"></iframe>
+        <iframe id="iframe3" name="iframe3" src="http://192.168.0.105/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($analytical); ?>"></iframe>
     </div>
 
     <script language="javascript" type="text/javascript">
