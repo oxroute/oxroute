@@ -31,11 +31,11 @@ $PageOfficeCtrl->setWriter($doc);
 $PageOfficeCtrl->addCustomToolButton("uTeach编题区", "Save", 9);
 //设置保存页面
 $PageOfficeCtrl->setSaveDataPage("/uteach/Word/SaveData.php?id=".$_SESSION['uid']);
-$PageOfficeCtrl->setMenubar(true);
-$PageOfficeCtrl->setMenubar(false);
-$PageOfficeCtrl->setTitlebar(false);
+//$PageOfficeCtrl->setMenubar(true);
+//$PageOfficeCtrl->setMenubar(false);
+//$PageOfficeCtrl->setTitlebar(true);
 //关闭Office工具栏
-$PageOfficeCtrl->setOfficeToolbars(false);
+//$PageOfficeCtrl->setOfficeToolbars(false);
 //打开Word文档
 //打开Word文档
 $PageOfficeCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];//若使用谷歌浏览器此行代码必须有，其他浏览器此行代码可不加
