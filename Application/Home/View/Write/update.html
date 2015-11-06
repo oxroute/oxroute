@@ -1,7 +1,57 @@
-﻿<include file="Public:header"/>
+﻿<?php
+	//******************************卓正PageOffice组件的使用*******************************
+	$ip = GetHostByName($_SERVER['SERVER_NAME']);//获取本机IP
+	require_once("http://".$ip.":8080/JavaBridge/java/Java.inc");//此行必须
+    $PageOfficeCtrl = new Java("com.zhuozhengsoft.pageoffice.PageOfficeCtrlPHP");//此行必须
+    $PageOfficeCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz");//此行必须，设置服务器页面
+
+java_set_file_encoding("utf8");//设置中文编码，若涉及到中文必须设置中文编码
+$doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument");//声明WordDocument变量
+//打开数据区域，openDataRegion方法的参数代表Word文档中的书签名称
+$dataRegion1 = $doc->openDataRegion("PO_question");
+//设置DataRegion的可编辑性
+$dataRegion1->setEditing(true);
+//为DataRegion赋值,此处的值可在页面中打开Word文档后自己进行修改
+$dataRegion1->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$date['wtime'])."/".$date['test'].".doc[/word]\r\n");
+
+$dataRegion1->setSubmitAsFile(true);
+
+$dataRegion2 = $doc->openDataRegion("PO_answer");
+$dataRegion2->setEditing(true);
+$dataRegion2->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$date['wtime'])."/".$date['answer'].".doc[/word]\r\n");
+
+$dataRegion2->setSubmitAsFile(true);
+
+$dataRegion3 = $doc->openDataRegion("PO_jiexi");
+$dataRegion3->setEditing(true);
+$dataRegion3->setValue("[word]/uteach/Word/doc/".$_SESSION['uid']."/".date('Ymd',$date['wtime'])."/".$date['analytical'].".doc[/word]\r\n");
+
+$dataRegion3->setSubmitAsFile(true);
+
+$PageOfficeCtrl->setWriter($doc);
+
+//添加自定义按钮
+$PageOfficeCtrl->addCustomToolButton("uTeach编题区", "Save", 9);
+//设置保存页面
+$PageOfficeCtrl->setSaveDataPage("/uteach/Word/SaveData.php?id=".$_SESSION['uid']);
+//$PageOfficeCtrl->setMenubar(true);
+$PageOfficeCtrl->setMenubar(false);
+$PageOfficeCtrl->setTitlebar(false);
+//$PageOfficeCtrl->setCustomToolbar(false);
+//关闭Office工具栏
+//$PageOfficeCtrl->setOfficeToolbars(false);
+//打开Word文档
+//打开Word文档
+$PageOfficeCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];//若使用谷歌浏览器此行代码必须有，其他浏览器此行代码可不加
+$OpenMode = new Java("com.zhuozhengsoft.pageoffice.OpenModeType");
+$PageOfficeCtrl->webOpen($questionDocPath, $OpenMode->docSubmitForm, "张三");//此行必须
+
+?>
+<include file="Public:header"/>
 <script language="javascript" type="text/javascript">
 var updateUrl="{:U('Public/update','','')}";
 var url="{:U('Write/index')}";
+var saveUrl="{:U('Write/write','','')}";
 </script> 
 <style> 
         .black_overlay{ display: none; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.8; opacity:.80; filter: alpha(opacity=88); } 
@@ -102,7 +152,7 @@ var url="{:U('Write/index')}";
 	<form  action="" method="post" >    
 	 
 		<table cellpadding="0" cellspacing="0" width="100%">
-		<input type="hidden" name="id" value="{$date.id}"/>
+		<!--<input type="hidden" name="id" value="{$date.id}"/>-->
 			<tr>
 				<td width="267px;">
 	<div class="index_left">
@@ -236,89 +286,20 @@ var url="{:U('Write/index')}";
 
 
 						<div id="right_bt" style="overflow:hidden">
-									<div class="bt_warp">
-									   <!--题干-->
-										<div></div>
-										<div class="tg">
-											<div class="tg_tit">
-												 <h1>题干</h1>
-												 <input id="questionContentEditContent" type="hidden"  name="test" value="{$date.test}" />
-											</div>
-											<!-- <div name="test" id="test" style="min-height:300px;padding: 10px;" contenteditable="true">{$date.test|htmlspecialchars_decode}</div> -->
-											<textarea id="content" name="test" style="min-height:300px;width:100%;" contenteditable="true">{$date.test|htmlspecialchars_decode}</textarea>
-										</div>
-									   <!--选择答案-->
-									<div class="da_warp">	 
-										<ul class="choose">
-											<h3>答案</h3>
-												<if condition="($date.answer neq '') AND ($date.answer eq 'A') " >
-													<li class="answer"><a href="javascript:void(0);" class="active">{$date.answer}</a></li>
-												<else />
-													<li class="answer"><a href="javascript:void(0);">A</a></li>
-												</if>
-												<if condition="($date.answer neq '') AND ($date.answer eq 'B') " >
-													<li class="answer"><a href="javascript:void(0);" class="active">{$date.answer}</a></li>
-												<else />
-													<li class="answer"><a href="javascript:void(0);">B</a></li>
-												</if>
-												<if condition="($date.answer neq '') AND ($date.answer eq 'C') " >
-													<li class="answer"><a href="javascript:void(0);" class="active">{$date.answer}</a></li>
-												<else />
-													<li class="answer"><a href="javascript:void(0);">C</a></li>
-												</if>
-												<if condition="($date.answer neq '') AND ($date.answer eq 'D') " >
-													<li class="answer"><a href="javascript:void(0);" class="active">{$date.answer}</a></li>
-												<else />
-													<li class="answer"><a href="javascript:void(0);">D</a></li>
-												</if>
-												<li class="add_answer"><a href="javascript:void(0);">+</a></li>
-													<li ><a href="javascript:void(0);" class="cut_answer">-</a></li>
-										</ul>
-										<!-- 填空题 -->
-								 		<div class="ti_kong_input">
-								 			<span class="ti_kong_input_da">答案</span>
-								 			<ul>
-								 				<li><input type="text" value="" /><a href="javascript:void(0);" class="ti_kong_add_input">+</a></li>
-								 			</ul>
-								 		</div>
+                            <?php echo $PageOfficeCtrl->getDocumentView("PageOfficeCtrl1") ?>
 
 
-									<!-- 简答题 -->
-									<input id="answerContentEditContent" type="hidden"  name="answer" value="{$date.answer}	"/>
-								 		<div class="jieda_da_textarea"  >
-								 				<span class="jieda_da_textarea_da">答案</span>
-								 				<div id='answer'name='answer' contenteditable="true"  style="min-height:300px;padding:10px;">
-								 				{$date.answer|htmlspecialchars_decode}	
-								 				</div>
-								 		</div>
-							 		</div>
-										<!--解析-->
-										<input id="analyticalContentEditContent" type="hidden"  name="analytical" value="{$date.analytical}"/>
-										<div class="tg">
-											<div class="tg_tit">
-												<h1>解析</h1>
-											</div>
-											<!-- <div name="analytical" id="analytical" style="min-height:150px;padding: 10px;" contenteditable="true">{$date.analytical|htmlspecialchars_decode}</div> -->
-											<textarea id="analytical" name="analytical" style="min-height:200px;width:100%;">{$date.analytical|htmlspecialchars_decode}</textarea>
-										</div>
-										<!--备注-->
-										<div class="tg">
-											<div class="tg_tit">
-												<h1>备注</h1>
-											</div>
-											<div class="h125">
-												<!--<textarea name="remarks" id="remarks" style="border:none;width:100%;height:100%;">{$date.remarks}</textarea>-->
-												<input type="hidden" name="remarks" id="remarks">
-												<div id="textarea" style="border:none;width:580px;height:100%" contenteditable="true">
-											</div>
-										</div>
-									</div>
+                            <script>
+                                document.getElementById("PageOfficeCtrl1").style.height = "90%";
+                                document.getElementById("PageOfficeCtrl1").style.width = "90%";
 
-							
-						</div>
+                            </script>
+
+
+                        </div>
 					<input type="hidden" id="bi_daan_val"  name='answer' value="{$date.answer}">
 					<ul class="btn_bc">
-						<li><input type="button" value="保存" class="update_save"/></li>
+						<li><input type="button" value="保存" class="update_save update_yes"/></li>
 						<li class="preview"><a class="temp_look" href="javascript:void(0);">预览 </a></li>
 					</ul>
 				 

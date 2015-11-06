@@ -1,4 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit();?>
+<?php if (!defined('THINK_PATH')) exit();?><script language="javascript" type="text/javascript">
+    var url="<?php echo U('Write/index');?>";
+    //
+
+</script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -232,32 +236,51 @@ var id='/uteach/index.php/home/Public/main_content.html';
         </td>
     </tr>
 </table>
-
+<div style="width: 1px; height: 1px; overflow: hidden;">
+    <iframe id="iframe1" name="iframe1" ></iframe>
+</div>
+<div style="width: 1px; height: 1px; overflow: hidden;">
+    <iframe id="iframe2" name="iframe2" ></iframe>
+</div>
+<div style="width: 1px; height: 1px; overflow: hidden;">
+    <iframe id="iframe3" name="iframe3"  ></iframe>
+</div>
 <form id="form1">
 <?php
 if(!empty($test)){ ?>
-    <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe1" name="iframe1" src="http://192.168.0.105/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($test); ?>"></iframe>
-    </div>
-<?php
-} if(!empty($answer)){ ?>
-    <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe2" name="iframe2" src="http://192.168.0.105/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($answer); ?>"></iframe>
-    </div>
-
-<?php
-} if(!empty($analytical)){ ?>
-    <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe3" name="iframe3" src="http://192.168.0.105/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($analytical); ?>"></iframe>
-    </div>
-
     <script language="javascript" type="text/javascript">
         var url="<?php echo U('Write/index');?>";
         //location.href = url;
-        </script>
+        var iframe1 = document.getElementById("iframe1");
+        var iframe2 = document.getElementById("iframe2");
+        var iframe3 = document.getElementById("iframe3");
+        //alert("<?php echo ($analytical); ?>");
+        iframe1.src =  "/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($test); ?>";
+        iframe2.src =  "/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($answer); ?>";
+        iframe3.src =  "/uteach/Word/FileMakerSingle.php?id=<?php echo ($_SESSION['uid']); ?>&type=<?php echo ($analytical); ?>";
+        setInterval(function () {
+            location.href = url;
+        }, 1000);
+        //
+    </script>
+<?php
+} if(empty($answer)){ ?>
+
+<?php
+} if(empty($analytical)){ ?>
+    <script language="javascript" type="text/javascript">
+    var url="<?php echo U('Write/index');?>";
+    //location.href = url;
+
+
+    </script>
+
 <?php
 } ?>
+
 </form>
+
+
 
 
 </body>

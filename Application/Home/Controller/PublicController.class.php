@@ -120,7 +120,25 @@ public function del(){
 
 /* 点击修改方法 */
 public function update(){
-	if(IS_POST){
+
+    if(!is_dir(WORD_PATH.$_SESSION['uid']."/".date('Ymd',time()))){
+        $path = WORD_PATH.$_SESSION['uid']."/".date('Ymd',time());
+        $res=mkdir(iconv("UTF-8", "GBK", $path),0777,true);
+
+        if (!$res){
+            $this->error("请修改Word目录权限！");
+        }
+    }
+    if(!is_file(WORD_PATH.$_SESSION['uid']."/".date('Ymd',time())."/qq.doc")) {
+        $docPath = WORD_PATH.$_SESSION['uid']."/".date('Ymd',time())."/qq.doc";
+        copy(WORD_PATH."/q.doc",$docPath);
+        chmod($docPath,0755);
+
+    }
+    $this->assign("questionDocPath",__ROOT__."/Word/doc/".$_SESSION['uid']."/".date('Ymd',time())."/qq.doc");
+
+
+    if(IS_POST){
 		$write=M('Write');
 			$write->create();
 			$id=$write->where(array('id'=>I('id')))->save();

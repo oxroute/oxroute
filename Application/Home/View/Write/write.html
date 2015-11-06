@@ -29,11 +29,14 @@ $PageOfficeCtrl->setWriter($doc);
 
 //添加自定义按钮
 $PageOfficeCtrl->addCustomToolButton("uTeach编题区", "Save", 9);
+//$PageOfficeCtrl->setJsFunction_BeforeDocumentSaved("BeforeDocumentSaved()");// 设置文件保存之前执行的事件
+//$PageOfficeCtrl->setJsFunction_AfterDocumentSaved("AfterDocumentSaved()");// 设置文件保存之后执行的事件
 //设置保存页面
 $PageOfficeCtrl->setSaveDataPage("/uteach/Word/SaveData.php?id=".$_SESSION['uid']);
 //$PageOfficeCtrl->setMenubar(true);
-//$PageOfficeCtrl->setMenubar(false);
-//$PageOfficeCtrl->setTitlebar(true);
+$PageOfficeCtrl->setMenubar(false);
+$PageOfficeCtrl->setTitlebar(false);
+//$PageOfficeCtrl->setCustomToolbar(false);
 //关闭Office工具栏
 //$PageOfficeCtrl->setOfficeToolbars(false);
 //打开Word文档
@@ -108,14 +111,24 @@ $(document).ready(function() {
                     <script>
                         document.getElementById("PageOfficeCtrl1").style.height = "90%";
                         document.getElementById("PageOfficeCtrl1").style.width = "90%";
+                        function BeforeDocumentSaved() {
+                            //$(".save_btn").click();
 
+                            //document.getElementById("PageOfficeCtrl1").Alert("BeforeDocumentSaved事件：文件就要开始保存了.");
+                            //return true;
+                        }
+                        function AfterDocumentSaved(IsSaved) {
+                            if (IsSaved) {
+                                document.getElementById("PageOfficeCtrl1").Alert("AfterDocumentSaved事件：文件保存成功了.");
+                            }
+                        }
                     </script>
 
 
                     <div class="bt_warp" style="padding-bottom:53px;">
 
                         <ul class="btn_bc">
-                            <li><input type="button" value="保存" class="add_save save_btn" /></li>
+                            <li><input type="button" value="保存" class="add_save" /></li>
                             <li class="preview"><a class="temp_look" href="javascript:void(0);">预览 </a></li>
                         </ul>
                     </div>
@@ -178,7 +191,7 @@ $(document).ready(function() {
     // }
 
     function Save() {
-
+        //alert("222222");
         //document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
     }
 </script>

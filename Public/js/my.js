@@ -582,13 +582,26 @@ $(function(){
 	$(".update_yes").on("click",function(){
 		var form = $('form');
 		var data = form.serialize();
-		$.post(updateUrl,data,function(data){
+		/*$.post(updateUrl,data,function(data){
 			// if(data==1){
 				// alert('添加成功!');
 				location.href=url;
 			// }
 			
-		});
+		});*/
+        document.getElementById("PageOfficeCtrl1").WebSave();
+        var name = document.getElementById("PageOfficeCtrl1").CustomSaveResult;
+        //alert(name);
+        $.post(saveUrl+"?reQuestion="+name,data,function(data){
+
+            // if(data==1){
+            // alert('添加成功!');
+            //alert(url+"?reQuestion="+name);
+            //location.href = "http://192.168.0.104/uteach/Word/FileMakerSingle.php?id=9&type=answer2015103113342634883176"
+            location.href=url+"?reQuestion="+name;
+            // }
+
+        });
 	})
 				// 保存此题
 				$(".add_save").on("click",function(){
@@ -600,7 +613,10 @@ $(function(){
 								$(".popu_box").hide()
 						})
 							return false;
-						}else*/ if($('#bi_daan_val').val()==""){
+
+						}else*/
+
+                    if($('#bi_daan_val').val()==""){
 							$("#mask1").show()
 							$("#tishi_bt1").show()
 							$(".popu_black").on("click",function(){
@@ -615,6 +631,7 @@ $(function(){
 						 $("#mask").hide()
 						 $(".popu_box").hide()
 						})
+
 
 
 
@@ -647,7 +664,6 @@ $(function(){
 									// alert('添加成功!');
 									location.href=url;
 								// }
-								
 							});
 				})
 
@@ -659,11 +675,12 @@ $(function(){
 						$("#mask").hide()
 						$(".popu_box").hide()
 					})
-					var id=$('.del').parent().find("#delId").val()
+
+					var id=$('.del').parent().find("#delId").val();
 					$(".delete_btn").on("click",function(){
 					 $.post(delUrl,{id:id},function(data){
 						 if(data==1){
-							 
+
 							   window.location.reload();
 						 }else{
 							 $("#mask").hide()
@@ -672,10 +689,7 @@ $(function(){
 						 }
 					 },'json')
 			    	})
-				
 				})
-					
-
 			})
 
 

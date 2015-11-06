@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); $ip = GetHostByName($_SERVER['SERVER_NAME']); require_once("http://".$ip.":8080/JavaBridge/java/Java.inc"); $PageOfficeCtrl = new Java("com.zhuozhengsoft.pageoffice.PageOfficeCtrlPHP"); $PageOfficeCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz"); java_set_file_encoding("utf8");$doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument");$dataRegion1 = $doc->openDataRegion("PO_question"); $dataRegion1->setEditing(true); $dataRegion1->setValue(""); $dataRegion1->setSubmitAsFile(true); $dataRegion2 = $doc->openDataRegion("PO_answer"); $dataRegion2->setEditing(true); $dataRegion2->setValue(""); $dataRegion2->setSubmitAsFile(true); $dataRegion3 = $doc->openDataRegion("PO_jiexi"); $dataRegion3->setEditing(true); $dataRegion3->setValue(""); $dataRegion3->setSubmitAsFile(true); $PageOfficeCtrl->setWriter($doc); $PageOfficeCtrl->addCustomToolButton("uTeach编题区", "Save", 9); $PageOfficeCtrl->setSaveDataPage("/uteach/Word/SaveData.php?id=".$_SESSION['uid']); $PageOfficeCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];$OpenMode = new Java("com.zhuozhengsoft.pageoffice.OpenModeType"); $PageOfficeCtrl->webOpen($questionDocPath, $OpenMode->docSubmitForm, "张三"); ?>
+<?php if (!defined('THINK_PATH')) exit(); $ip = GetHostByName($_SERVER['SERVER_NAME']); require_once("http://".$ip.":8080/JavaBridge/java/Java.inc"); $PageOfficeCtrl = new Java("com.zhuozhengsoft.pageoffice.PageOfficeCtrlPHP"); $PageOfficeCtrl->setServerPage("http://".$ip.":8080/JavaBridge/poserver.zz"); java_set_file_encoding("utf8");$doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument");$dataRegion1 = $doc->openDataRegion("PO_question"); $dataRegion1->setEditing(true); $dataRegion1->setValue(""); $dataRegion1->setSubmitAsFile(true); $dataRegion2 = $doc->openDataRegion("PO_answer"); $dataRegion2->setEditing(true); $dataRegion2->setValue(""); $dataRegion2->setSubmitAsFile(true); $dataRegion3 = $doc->openDataRegion("PO_jiexi"); $dataRegion3->setEditing(true); $dataRegion3->setValue(""); $dataRegion3->setSubmitAsFile(true); $PageOfficeCtrl->setWriter($doc); $PageOfficeCtrl->addCustomToolButton("uTeach编题区", "Save", 9); $PageOfficeCtrl->setSaveDataPage("/uteach/Word/SaveData.php?id=".$_SESSION['uid']); $PageOfficeCtrl->setMenubar(false); $PageOfficeCtrl->setTitlebar(false); $PageOfficeCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];$OpenMode = new Java("com.zhuozhengsoft.pageoffice.OpenModeType"); $PageOfficeCtrl->webOpen($questionDocPath, $OpenMode->docSubmitForm, "张三"); ?>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -298,14 +298,24 @@ var id='/uteach/index.php/home/Public/main_content.html';
                     <script>
                         document.getElementById("PageOfficeCtrl1").style.height = "90%";
                         document.getElementById("PageOfficeCtrl1").style.width = "90%";
+                        function BeforeDocumentSaved() {
+                            //$(".save_btn").click();
 
+                            //document.getElementById("PageOfficeCtrl1").Alert("BeforeDocumentSaved事件：文件就要开始保存了.");
+                            //return true;
+                        }
+                        function AfterDocumentSaved(IsSaved) {
+                            if (IsSaved) {
+                                document.getElementById("PageOfficeCtrl1").Alert("AfterDocumentSaved事件：文件保存成功了.");
+                            }
+                        }
                     </script>
 
 
                     <div class="bt_warp" style="padding-bottom:53px;">
 
                         <ul class="btn_bc">
-                            <li><input type="button" value="保存" class="add_save save_btn" /></li>
+                            <li><input type="button" value="保存" class="add_save" /></li>
                             <li class="preview"><a class="temp_look" href="javascript:void(0);">预览 </a></li>
                         </ul>
                     </div>
@@ -368,7 +378,7 @@ var id='/uteach/index.php/home/Public/main_content.html';
     // }
 
     function Save() {
-
+        //alert("222222");
         //document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
     }
 </script>

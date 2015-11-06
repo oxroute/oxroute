@@ -11,7 +11,7 @@
     $filepath="doc/".$id."/".date('Ymd',time());
     $type = $_REQUEST['type'];
 	$doc = new Java("com.zhuozhengsoft.pageoffice.wordwriter.WordDocument");//声明WordDocument变量
-
+    $FileMakerCtrl->UserAgent = $_SERVER['HTTP_USER_AGENT'];
 	//禁用右击事件
 	$doc->setDisableWindowRightClick(true);
 	//给数据区域赋值，即把数据填充到模板中相应的位置

@@ -64,7 +64,7 @@
         }
 
 
-        $doc->showPage(500, 400);
+        //$doc->showPage(500, 400);
         $doc->setCustomSaveResult($questionDoc."-".$answerDoc."-".$jiexiDoc);
         echo $doc->close();
 /*$ch = curl_init("http://".$ip."/uteach/Word/FileMakerSingle.php?id=".$id."&type=question");
