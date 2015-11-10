@@ -207,13 +207,12 @@ $(function(){
 						</div>
 					</div>
 
-					<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($vo["questions"] == 选择题 ): ?><div class='conti'>
+					<?php if(is_array($list["select"])): $i = 0; $__LIST__ = $list["select"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($vo["questions"] == 选择题 ): ?><div class='conti'>
 								<div class="list">
 								 <!--  <input  type='hidden'  class="weight" value="<?php echo ($vo["weight"]); ?>"> -->
 								  <input  type='hidden'  class="testid" value="<?php echo ($vo["id"]); ?>">
 								  <div>
                                       <iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
-
                                   </div>
 								 
 								</div>
@@ -225,12 +224,11 @@ $(function(){
 					<div class='conti'>
 						<div class='type2'> 
 								<h5 class="title_one"><span><?php echo (explodestr0($epaper["two_type"])); ?></span><span><?php echo (explodestr2($epaper["two_type"])); ?></span></h5>
-								<!-- <h5 class="title_two"><?php echo (explodestr2($epaper["one_type"])); ?>（<?php echo (explodestr3($epaper["one_type"])); ?>）</h5> -->
+								<h5 class="title_two">一、必答题（共30分）</h5>
 						</div>
 					</div>
 
-
-					<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($vo["questions"] != 选择题): ?><div class='conti'>
+					<?php if(is_array($list["notselect"])): $i = 0; $__LIST__ = $list["notselect"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($vo["questions"] == 填空题): ?><div class='conti'>
 								<div class="list">
 									<!-- <input  type='hidden'  class="weight" value="<?php echo ($vo["weight"]); ?>"> -->
 									 <input  type='hidden'  class="testid" value="<?php echo ($vo["id"]); ?>">
@@ -239,7 +237,29 @@ $(function(){
 
                                      </div>
 								</div>
-						</div><?php endif; endforeach; endif; else: echo "" ;endif; ?> 
+						</div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+
+
+					<div class='conti'>
+						<div class='type2'>
+							<h5 class="title_two">二、选答题（共20分。请在以下三个模块试题中任选一个模块试题作答，若选答了多个模块的试题，以所答第一模块的试题评分）</h5>
+						</div>
+					</div>
+					<?php if(is_array($list["xuanxiu"])): $i = 0; $__LIST__ = $list["xuanxiu"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$volist): $mod = ($i % 2 );++$i; if(is_array($volist)): $k = 0; $__LIST__ = $volist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($k % 2 );++$k; if($k == 1): ?><div class='conti'>
+									<div class='type2'>
+										<h5 class="title_two"><?php echo ($vo["fname"]); ?></h5>
+									</div>
+								</div><?php endif; ?>
+							<div class='conti'>
+								<div class="list">
+									<!-- <input  type='hidden'  class="weight" value="<?php echo ($vo["weight"]); ?>"> -->
+									<input  type='hidden'  class="testid" value="<?php echo ($vo["id"]); ?>">
+									<div>
+										<iframe  src="/uteach/Word/doc/<?php echo ($_SESSION['uid']); ?>/<?php echo (date('Ymd',$vo["wtime"])); ?>/<?php echo ($vo["test"]); ?>.htm" frameborder="0" height="90" width="100%" scrolling="no"></iframe>
+
+									</div>
+								</div>
+							</div><?php endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; ?>
 				</div>
 
 				<div id="divide_border">

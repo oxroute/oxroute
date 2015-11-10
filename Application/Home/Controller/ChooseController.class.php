@@ -3,6 +3,7 @@
  * 选择试题控制器
  */
 namespace Home\Controller;
+use Home\Model\WriteModel;
 use Think\Controller;
 header('Content-type: text/html;charset=UTF-8');
 class ChooseController extends CommonController {
@@ -329,7 +330,7 @@ class ChooseController extends CommonController {
             chmod($docPath,0755);
         }
 
-        $this->assign("pagePath",__ROOT__."/Word/page/".$_SESSION['uid']."/".I('epaperId').".doc");
+        //$this->assign("pagePath",__ROOT__."/Word/page/".$_SESSION['uid']."/".I('epaperId').".doc");
 
     	// dump($_SESSION);
     	$array=$this->epaper=M('epaper')->where(array('id'=>I('epaperId')))->find();
@@ -351,8 +352,18 @@ class ChooseController extends CommonController {
 
     	foreach($str as $n =>$v){
     		$test=M('write')->where(array('status'=>0,'id'=>$v))->find();
-    		$all[$n]=$test;
-    		$all[$n]['test']=htmlspecialchars_decode($test['test']);
+			if(!empty($test)) {
+				$test['fname'] = WriteModel::getFname($test['fid']);
+				if ($test['questions'] == "选择题") {
+					$all['select'][] = $test;
+				} elseif (WriteModel::isElective($test['fid'])) {
+					$all['xuanxiu'][$test['fid']][] = $test;
+				} else {
+					$all['notselect'][] = $test;
+				}
+			}
+    		/*$all[$n]=$test;
+    		$all[$n]['test']=htmlspecialchars_decode($test['test']);*/
     	}
     	$this->assign('list',$all);
     	$this->display();
