@@ -3,10 +3,12 @@
  * 编题控制器
 */
 namespace Home\Controller;
+use Home\Model\WriteModel;
 use Think\Controller;
 header('Content-type: text/html;charset=UTF-8');
 class WriteController extends CommonController {
 	public function index(){
+
 		$test = null;
 		$answer = null;
 		$analytical = null;

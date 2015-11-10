@@ -11,4 +11,34 @@ class WriteModel extends RelationModel{
 		array('analytical', 'require', '请填写解析'),
 		//array('source', 'require', '请填写来源'),
 		);
+
+	/*
+	 * 判断是否是选修的，如果是就分开显示出来
+	 */
+	public static function isElective($fid = null){
+		if(!empty($fid)) {
+			$data = WriteModel::getCategory($fid);
+			return $data['type'] == 1 ? true : false;
+
+		}
+		return false;
+	}
+
+	/*
+	 * 获取科目分级ID
+	 */
+	public static function getFname($fid){
+		if(!empty($fid)) {
+			$data = WriteModel::getCategory($fid);
+			return $data['name'];
+		}
+		return null;
+	}
+
+	private static function getCategory($id) {
+		$category=M('category');
+		$data = $category->where(array('id'=>$id))->find();
+		return $data;
+
+	}
 }
